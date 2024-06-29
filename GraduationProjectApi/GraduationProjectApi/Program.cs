@@ -30,6 +30,7 @@ namespace GraduationProjectApi
             builder.Services.AddTransient<ISimilarRepository<Hotline>, HotlinesRepository>();
             builder.Services.AddTransient<ISimilarRepository<Job>, JobsRepostirory>();
             builder.Services.AddTransient<ISimilarRepository<Kind>, KindsRepository>();
+            builder.Services.AddTransient<INearby, Nearby>();
 
             builder.Services.AddAutoMapper(typeof(Program));
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

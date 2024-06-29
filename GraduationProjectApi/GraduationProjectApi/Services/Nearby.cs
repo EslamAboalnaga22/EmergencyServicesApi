@@ -5,49 +5,23 @@ using Microsoft.EntityFrameworkCore;
 
 namespace GraduationProjectApi.Services
 {
-    public class PharmaciesService : IPharmaciesService
+    public class Nearby : INearby
     {
         private readonly AppDbContext context;
 
-        public PharmaciesService(AppDbContext context, IMapper mapper)
+        public Nearby(AppDbContext context)
         {
             this.context = context;
-        }
-        public async Task<IEnumerable<Pharmacy>> GetAll()
-        {
-            return await context.Pharmacies.ToListAsync();
-        }
-        public async Task<Pharmacy> GetById(int id)
-        {
-            return await context.Pharmacies.SingleOrDefaultAsync(x => x.Id == id);
-        }
-        public async Task<Pharmacy> Add(Pharmacy pharmacy)
-        {
-            await context.AddAsync(pharmacy);
-            context.SaveChangesAsync();
-            return pharmacy;
-        }
-        public Pharmacy Update(Pharmacy pharmacy)
-        {
-            context.Update(pharmacy);
-            context.SaveChanges();
-            return pharmacy;
-        }
-        public Pharmacy Delete(Pharmacy pharmacy)
-        {
-            context.Remove(pharmacy);
-            context.SaveChanges();
-            return pharmacy;
         }
         public double DegreesToRadians(float deg)
         {
             return deg * Math.PI / 180;
         }
-        public async Task<IEnumerable<Pharmacy>> GetDistance(string myLocation)
+        public async Task<IEnumerable<Hospital>> GetDistance(string myLocation)
         {
-            var Pharmacies = await context.Pharmacies.ToListAsync();
+            var hospitals = await context.Hospitals.Include(x => x.Kind).OrderBy(x => x.Distance).ToListAsync();
 
-            foreach (var item in Pharmacies)
+            foreach (var item in hospitals)
             {
                 item.MyLocation = myLocation;
 
@@ -72,7 +46,7 @@ namespace GraduationProjectApi.Services
 
             context.SaveChanges();
 
-            return Pharmacies.OrderBy(x => x.Distance);
+            return hospitals;
         }
     }
 }

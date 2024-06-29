@@ -9,5 +9,6 @@ namespace GraduationProjectApi.Services
         Task<Pharmacy> Add(Pharmacy pharmacy);
         Pharmacy Update(Pharmacy pharmacy);
         Pharmacy Delete(Pharmacy pharmacy);
+        Task<IEnumerable<Pharmacy>> GetDistance(string MyLocation);
     }
 }

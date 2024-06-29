@@ -9,5 +9,6 @@ namespace GraduationProjectApi.Services
         Task<Hospital> Add(Hospital hospital);
         Hospital Update(Hospital hospital);
         Hospital Delete(Hospital hospital);
+        Task<IEnumerable<Hospital>> GetDistance(string MyLocation);
     }
 }

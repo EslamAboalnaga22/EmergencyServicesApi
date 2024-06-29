@@ -11,6 +11,10 @@ namespace GraduationProjectApi.Models
         public string City { get; set; } = string.Empty;
         public string? Village { get; set; } = string.Empty;
         public string Location { get; set; } = string.Empty;
-        public int? Phone { get; set; }
+        public string? Phone { get; set; }
+        
+        public string MyLocation { get; set; } = string.Empty;
+
+        public float Distance { get; set; }
     }
 }

@@ -39,6 +39,14 @@ namespace GraduationProjectApi.Controllers
 
             return Ok(pharmacy);
         }
+        [HttpGet]
+        [Route("Nearby")]
+        public async Task<IActionResult> GetLocation(string location)
+        {
+            var distance = await pharmaciesService.GetDistance(location);
+
+            return Ok(distance);
+        }
 
         [HttpPost]
         public async Task<IActionResult> CreateAsync([FromForm] PharmacyDto dto)

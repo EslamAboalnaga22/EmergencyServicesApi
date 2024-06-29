@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using AutoMapper.Configuration.Annotations;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace GraduationProjectApi.Models
@@ -13,10 +14,16 @@ namespace GraduationProjectApi.Models
         public string City { get; set; } = string.Empty;
         public string? Village { get; set; } = string.Empty;
         public string Location { get; set; } = string.Empty;
-        public int? Phone { get; set; }
+        public string? Phone { get; set; }
 
         [ForeignKey(nameof(Kind))]
         public int KindId { get; set; }
         public Kind? Kind { get; set; }
+
+
+        public string MyLocation { get; set; } = string.Empty;
+
+        public float Distance { get; set; }
+
     }
 }

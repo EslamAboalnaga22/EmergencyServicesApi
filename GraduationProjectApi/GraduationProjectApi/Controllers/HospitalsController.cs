@@ -6,7 +6,9 @@ using GraduationProjectApi.Services;
 
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.VisualBasic;
 using System;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace GraduationProjectApi.Controllers
 {
@@ -27,11 +29,10 @@ namespace GraduationProjectApi.Controllers
         public async Task<IActionResult> GetAllAsync()
         {
             var hospitals = await hospitalsService.GetAll();
-
             var data = mapper.Map<IEnumerable<HospitalDetalilsDto>>(hospitals);
-
             return Ok(data);
         }
+
 
         [HttpGet("{id}")]
         public async Task<IActionResult> GetByIdAsync(int id)
@@ -44,6 +45,15 @@ namespace GraduationProjectApi.Controllers
             var data = mapper.Map<HospitalDetalilsDto>(hospital);
 
             return Ok(data);
+        }
+
+        [HttpGet]
+        [Route("Nearby")]
+        public async Task<IActionResult> GetLocation(string location)
+        {
+            var distance = await hospitalsService.GetDistance(location);
+
+            return Ok(distance);
         }
 
         [HttpPost]
